@@ -9,6 +9,7 @@ public class playHandler : MonoBehaviour
     private GameObject mainWord;
     private Text wordText;
     private List<Vector3> positions = new List<Vector3>(4);
+    private int successes = 0;
 
     public void createGame()
     {
@@ -200,4 +201,18 @@ public class playHandler : MonoBehaviour
             positions.RemoveAt(num);
         }
     }
+
+    public void incrementSuccess(){
+        successes += 1;
+        createGame();
+        if(successes >= 10){
+            mainWord.GetComponent<Text>().text = "VICTORY";
+            mainWord.AddComponent<colourCycling>();
+        }
+    }
+
+    private void removeBtns(){
+        
+    }
+
 }
