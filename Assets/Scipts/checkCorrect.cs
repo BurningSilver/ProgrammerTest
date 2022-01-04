@@ -17,7 +17,7 @@ public class checkCorrect : MonoBehaviour
             playCanvas.GetComponent<playHandler>().incrementSuccess();
         }
         else{
-            playCanvas.GetComponent<playHandler>().createGame();
+            playCanvas.GetComponent<playHandler>().createRound();
         }
     }
 

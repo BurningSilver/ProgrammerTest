@@ -11,8 +11,35 @@ public class playHandler : MonoBehaviour
     private List<Vector3> positions = new List<Vector3>();
     private GameObject[] choices;
     private int successes = 0;
+    private GameObject score;
+    private GameObject resetBtn;
 
-    public void createGame()
+//setting up initial values for everything, continues into createRound()
+    public void createGame(){
+
+        if(mainWord != null && mainWord.GetComponent<colourCycling>()){
+            colourCycling comp = mainWord.GetComponent<colourCycling>();
+            Destroy(comp);
+        }
+
+        resetBtn = GameObject.Find("ResetBtn");
+        resetBtn.SetActive(false);
+        successes = 0;
+        score = GameObject.Find("ScoreText");
+        if(score == null){
+            score = new GameObject();
+            score.name = "ScoreText";
+            Text scoreText = score.AddComponent<Text>();
+            scoreText.rectTransform.SetParent(GameObject.Find("PlayCanvas").transform);
+            scoreText.alignment = TextAnchor.MiddleCenter;
+            RectTransform canvas = GameObject.Find("MainMenuCanvas").GetComponent<RectTransform>();
+            score.transform.position = new Vector3(canvas.rect.width/2, canvas.rect.height/2, 0);
+            scoreText.text = successes + "/10";
+        }
+        createRound();
+    }
+
+    public void createRound()
     {
 
         if(choices != null){
@@ -210,10 +237,14 @@ public class playHandler : MonoBehaviour
 
     public void incrementSuccess(){
         successes += 1;
-        createGame();
+        score.GetComponentInChildren<Text>().text = successes + "/10";
         if(successes >= 10){
+            removeBtns();
+            resetBtn.SetActive(true);
             mainWord.GetComponent<Text>().text = "VICTORY";
             mainWord.AddComponent<colourCycling>();
+        }else{
+            createRound();
         }
     }
 
