@@ -241,6 +241,7 @@ public class playHandler : MonoBehaviour
         if(successes >= 10){
             removeBtns();
             resetBtn.SetActive(true);
+            GameObject.Find("MainMenuCanvas").GetComponent<Timer>().StopStopWatch();
             mainWord.GetComponent<Text>().text = "VICTORY";
             mainWord.AddComponent<colourCycling>();
         }else{

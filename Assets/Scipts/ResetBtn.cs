@@ -8,8 +8,6 @@ public class ResetBtn : MonoBehaviour
     public GameObject playCanvas;
 
     public void restart(){
-        // mainMenu = GameObject.Find("mainMenu");
-        // playCanvas = GameObject.Find("PlayCanvas");
         mainMenu.SetActive(true);
         playCanvas.SetActive(false);
     }

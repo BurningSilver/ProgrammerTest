@@ -10,5 +10,6 @@ public class playBtn : MonoBehaviour
         playCanvas = GameObject.Find("PlayCanvas");
         GameObject.Find("mainMenu").SetActive(false);
         playCanvas.GetComponent<playHandler>().createGame();
+        GameObject.Find("MainMenuCanvas").GetComponent<Timer>().StartStopwatch();
     }
 }
