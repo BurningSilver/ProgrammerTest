@@ -8,11 +8,17 @@ public class playHandler : MonoBehaviour
     // creates the first word to guess.
     private GameObject mainWord;
     private Text wordText;
-    private List<Vector3> positions = new List<Vector3>(4);
+    private List<Vector3> positions = new List<Vector3>();
+    private GameObject[] choices;
     private int successes = 0;
 
     public void createGame()
     {
+
+        if(choices != null){
+            removeBtns();
+        }
+
         mainWord = GameObject.Find("mainWord");
         if (mainWord == null)
         {
@@ -131,7 +137,7 @@ public class playHandler : MonoBehaviour
 
         GameObject refBtn = GameObject.Find("preFabBtn");
 
-        GameObject[] choices = new GameObject[4];
+        choices = new GameObject[4];
         string[] colourChoices = new string[4];
 
         GameObject correct = GameObject.Instantiate(refBtn);
@@ -212,7 +218,10 @@ public class playHandler : MonoBehaviour
     }
 
     private void removeBtns(){
-        
+        foreach(GameObject go in choices){
+            Destroy(go);
+        }
+        positions.Clear();
     }
 
 }
